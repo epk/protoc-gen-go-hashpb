@@ -61,7 +61,7 @@ func Generate(p *protogen.Plugin) error {
 		}
 
 		if f.Desc.Syntax() != protoreflect.Proto3 {
-			return fmt.Errorf("file is not protobuf v3: %s", f.Desc.Path())
+			continue
 		}
 
 		pkgFiles[f.GoImportPath] = append(pkgFiles[f.GoImportPath], f)
