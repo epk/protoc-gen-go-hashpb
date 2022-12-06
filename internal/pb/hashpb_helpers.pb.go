@@ -295,6 +295,8 @@ func cerbos_hashpb_test_TestAllTypes_hashpb_sum(m *TestAllTypes, hasher hash.Has
 			sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
 
 			for _, k := range keys {
+				_, _ = hasher.Write(protowire.AppendString(nil, k))
+
 				_, _ = hasher.Write(protowire.AppendString(nil, m.MapStringString[k]))
 
 			}
@@ -312,6 +314,8 @@ func cerbos_hashpb_test_TestAllTypes_hashpb_sum(m *TestAllTypes, hasher hash.Has
 			sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
 
 			for _, k := range keys {
+				_, _ = hasher.Write(protowire.AppendVarint(nil, k))
+
 				_, _ = hasher.Write(protowire.AppendString(nil, m.MapUint64String[k]))
 
 			}
@@ -329,6 +333,8 @@ func cerbos_hashpb_test_TestAllTypes_hashpb_sum(m *TestAllTypes, hasher hash.Has
 			sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
 
 			for _, k := range keys {
+				_, _ = hasher.Write(protowire.AppendVarint(nil, uint64(k)))
+
 				_, _ = hasher.Write(protowire.AppendString(nil, m.MapInt32String[k]))
 
 			}
@@ -346,6 +352,8 @@ func cerbos_hashpb_test_TestAllTypes_hashpb_sum(m *TestAllTypes, hasher hash.Has
 			sort.Slice(keys, func(i, j int) bool { return !keys[i] && keys[j] })
 
 			for _, k := range keys {
+				_, _ = hasher.Write(protowire.AppendVarint(nil, protowire.EncodeBool(k)))
+
 				_, _ = hasher.Write(protowire.AppendString(nil, m.MapBoolString[k]))
 
 			}
@@ -363,6 +371,8 @@ func cerbos_hashpb_test_TestAllTypes_hashpb_sum(m *TestAllTypes, hasher hash.Has
 			sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
 
 			for _, k := range keys {
+				_, _ = hasher.Write(protowire.AppendVarint(nil, uint64(k)))
+
 				if m.MapInt64NestedType[k] != nil {
 					cerbos_hashpb_test_TestAllTypes_NestedMessage_hashpb_sum(m.MapInt64NestedType[k], hasher, ignore)
 				}
@@ -553,6 +563,8 @@ func google_protobuf_Struct_hashpb_sum(m *structpb.Struct, hasher hash.Hash, ign
 			sort.Slice(keys, func(i, j int) bool { return keys[i] < keys[j] })
 
 			for _, k := range keys {
+				_, _ = hasher.Write(protowire.AppendString(nil, k))
+
 				if m.Fields[k] != nil {
 					google_protobuf_Value_hashpb_sum(m.Fields[k], hasher, ignore)
 				}

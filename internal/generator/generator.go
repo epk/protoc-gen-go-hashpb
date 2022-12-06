@@ -233,6 +233,7 @@ func (g *codegen) genMapField(gf *protogen.GeneratedFile, field *protogen.Field)
 	gf.P()
 
 	gf.P("for _, k := range keys {")
+	g.genSingularField(gf, field.Desc.MapKey(), "k")
 	g.genSingularField(gf, field.Desc.MapValue(), fmt.Sprintf("%s[k]", fieldName))
 	gf.P("}")
 	gf.P("}")
